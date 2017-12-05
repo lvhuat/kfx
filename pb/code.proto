@@ -1,0 +1,85 @@
+syntax = "proto3";
+
+package pb;
+
+enum Codes{
+    Ping                = 0;
+    // 鉴权,配置
+    ConfigService       = 10;
+    GetCoreStatus       = 11;
+
+    // 基本设置
+    GetCommonSetting    = 1001;
+    // 管理员权限
+    GetManagerSetting   = 1002;
+    // 节假日设置
+    GetHolidaySetting   = 1003;
+    // 时间设置
+    GetTimeSetting      = 1004;
+
+    // 申请账户
+    Apply               = 1101;
+    // 获取账户信息
+    GetAccountInfo      = 1102;
+    // 获取账户入金
+    GetAccountMargin    = 1103;
+    // 检验密码
+    CheckPassword       = 1104;
+    // 更新密码
+    UpdatePassword      = 1105;
+    // 获取账户组
+    GetGroups           = 1106;
+    GetGroup            = 1107;
+
+    // 获取品种配置
+    GetSymbols          = 1201;
+    // 获取K线
+    GetCharts           = 1205;
+    // 获取当前报价
+    GetPrices           = 1210;
+    // 交易
+    GetOrders           = 1315;
+    // 获取当前持仓
+    GetPositions        = 1320;   
+    // 获取历史平仓 
+    GetClosed           = 1325;    
+    // 开市价单 
+    OpenMarket          = 1330;
+    // 开限价单
+    OpenLimit           = 1331;
+    // 开止损单
+    OpenStop            = 1332;
+    // 更新订单
+    UpdateOrder         = 1333;
+    // 更新持仓单
+    UpdatePosition      = 1334;
+    // 平仓
+    ClosePosition       = 1335;
+    // 入金
+    Deposit             = 1350;
+    // 出金
+    Withdraw            = 1351;
+    // 入信用金
+    CreditIn            = 1355;
+    // 出信用金
+    CreditOut           = 1356;
+    // 获取历史出入金记录
+    GetHistoryCashflows  = 1370;
+    // 获取历史信用金操作记录
+    GetHistoryCredits    = 1371; 
+
+    // 工具类
+    CalPositionProfit  = 1401;
+    // 交易推送
+    TradeEvent         = 4001;
+    // 出入金推送
+    CashflowEvent      = 4010;
+    // 报价推送
+    PriceEvent         = 4009;
+    // 组配置推送   
+    GroupEvent         = 4005;
+    // 账户推送
+    AccountEvent       = 4006;
+    // 品种推送
+    SymbolEvent        = 4008;
+}

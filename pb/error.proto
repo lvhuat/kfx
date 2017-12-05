@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package pb;
+
+enum Errors{
+    OK                  = 0;
+
+    // 组件错误
+    RedisNotWorking     = 10001; // Redis组件不工作
+    MysqlNotWorking     = 10002; // Mysql组件不工作
+    CoreNotWorking      = 10003; // 核心不工作
+    
+    // MT4 [10000 ~ 20000]
+    // MT5 [20000 ~ 30000]
+}

@@ -1,0 +1,77 @@
+
+syntax = "proto3";
+
+package pb;
+
+message SymbolEventMessage {
+
+}
+
+message GetCommonSettingRequest {
+}
+
+message GetCommonSettingResponse {
+    
+}
+
+message GetPositionsRequest{
+    int32 login = 1;            // 查询账户ID,在管理员模式下需要传递
+    int64 since = 2;            // 查询起始时间
+    int64 until = 3;            // 查询终止时间
+    repeated SortBy sortBy = 4; // 查询结果排序，可以多个排序规则，但是同类不允许同时存在
+    bool calProfit = 5;         // 查询结果是否包含最新的浮动盈亏，使用会导致性能下降，延迟加大
+
+    enum QueryTimeBy{
+        // 按开仓时间查询
+        Open = 0;
+        // 按平仓时间查询
+        Close = 1;
+        // 按开仓时间作为起始查询条件，平仓作为结束
+        Expand = 2; 
+        // 按更新的时间戳
+        Timestamp = 3;
+    }
+
+    enum SortBy{
+        // 开仓时间顺序排序
+        OpenTimeAsc = 0;
+        // 开仓时间逆序
+        OpenTimeDesc = 1;
+        // 平仓时间顺序
+        CloseTimeAsc = 2;
+        // 平仓时间逆序
+        CloseTimeDesc = 3;
+        // 账户顺序
+        LoginTimeAsc = 4;
+        // 账户顺序
+        LoginTimeDesc = 5;
+        // 更新时间顺序
+        TimestampAsc = 6;
+        // 更新时间逆序
+        TimestampDesc = 7;
+    }
+}
+
+message GetPricesRequest{
+    // login和group 任意一个是有意义的值，都会返回组中启用且包含加点的报价，否则会返回manager下所有的报价
+    int32 account = 1;
+    string group = 2;
+    // 查询报价，如果不填写，则会返回，所有可
+    repeated string symbols = 3;
+}
+
+message ConfigServiceRequest{
+    string server = 1;          // 接口对接的服务器ID,使用的是多服务器模式，则需要配置此值才能将请求转发到对应服务器上
+    MetaTradeType mtType = 2;   // 接口对接的交易平台
+    MetaTradeRole apiRole = 3;  // 接口使用角色
+    bool correctTimezone = 4;   // 设置后，传递的时间戳可以按照标准的时间戳传递
+    
+    enum MetaTradeRole {
+        // 以账号的角色访问接口，看起来就像在使用交易客户端在调用接口
+        Account = 0;
+        // 以管理员的角色访问接口，可以查看品种配置和账户组配置，能看到一些统计类信息
+        Manager = 1;
+        // 以拥有者的角色访问接口，对MT4服务器拥有绝对色控制权限，但是需要管理员账号支持
+        Admin   = 2;
+    }
+}

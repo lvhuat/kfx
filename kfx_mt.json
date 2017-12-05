@@ -1,0 +1,16 @@
+{
+    "servers":[
+        {
+            "id":80,
+            "vendor":"mt4",
+            "cores":["127.0.0.1:20080","127.0.0.2:20080"],
+            "mysql":[
+                {"host":"127.0.0.1:3306","user":"admin","password":"abc123","db":"mt4_180"}
+            ],
+            "redis":[
+                {"host":"127.0.0.1:6379","password":"123abc"}
+            ],
+            "cacheChart":true
+        }
+    ]
+}
